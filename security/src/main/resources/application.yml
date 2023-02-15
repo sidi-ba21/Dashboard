@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: api
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/dashboard?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+    hibernate:
+        ddl-auto: update
+        naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+        hibernate:
+            dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  thymeleaf:
+    cache: false
+  security:
+    user:
+      name: Squalli
+      password: 103195
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: 476853128099-jd9dvuo1uge7fkrlqrqe8pbluibfspt4.apps.googleusercontent.com
+            clientSecret: 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
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - email
+              - profile
+          github:
+            clientId: 47b3c50944c1b32bd803
+            clientSecret: 5358c245dd701b9f7867a95a1734bcf57a8c3781
+            redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+            scope:
+              - read:user
+              - user:email
+              - repo:status
+              - public_repo
+              - read:org
+          facebook:
+              clientId: 855058479140460
+              clientSecret: 7a5bd3566d8f65541da5cfb8f215a118
+              redirectUri: "{baseUrl}/oauth2/callback/{registrationId}"
+              scope:
+                - email
+                - public_profile
+        provider:
+            facebook:
+              authorizationUri: https://www.facebook.com/v15.0/dialog/oauth
+              tokenUri: https://graph.facebook.com/v15.0/oauth/access_token
+              userInfoUri: https://graph.facebook.com/v15.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,picture.width(200).height(200)
+
+app:
+  auth:
+    tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1
+    tokenExpirationMsec: 864000000
+  cors:
+    allowedOrigins: http://localhost:3000,http://localhost:8080, http://localhost:8082, http://localhost:2000
+  oauth2:
+    # After successfully authenticating with the OAuth2 Provider,
+    # we'll be generating an auth token for the user and sending the token to the
+    # redirectUri mentioned by the client in the /oauth2/authorize request.
+    # We're not using cookies because they won't work well in mobile clients.
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth2/redirect
+      - myandroidapp://oauth2/redirect
+      - myiosapp://oauth2/redirect

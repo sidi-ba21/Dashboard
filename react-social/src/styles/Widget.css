@@ -1,0 +1,12 @@
+.widgetStyle {
+    margin: 1rem 0 1rem 0;
+}
+
+.widgetImg {
+    width: 25%;
+    height: 25%;
+}
+
+.closeButton {
+    float: right;
+}
